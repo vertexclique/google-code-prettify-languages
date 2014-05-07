@@ -53,6 +53,6 @@ PR['registerLangHandler'](
          [PR['PR_LITERAL'],     /^(?:\d+|0[xX][a-fA-F0-9]+)/],
 
          // punctuation
-         [PR['PR_PUNCTUATION'], /^[()\[\]{},=*<>:]|\.\.\.$/]
+          
         ]),
     ['nasm', 'asm']);
