@@ -9,167 +9,92 @@
     <link rel="stylesheet" href="https://raw.githubusercontent.com/vertexclique/google-code-prettify-languages/gh-pages/prettify.css">
 
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
-    <script src="lang-config.js"></script>
-    <script src="lang-css.js"></script>
-    <script src="lang-scss.js"></script>
-    <script src="lang-vim.js"></script>
+    <script src="https://raw.githubusercontent.com/vertexclique/google-code-prettify-languages/gh-pages/lang-nasm.js"></script>
+    <script src="https://github.com/hail2u/google-code-prettify-language-handlers/blob/gh-pages/lang-css.js"></script>
   </head>
   <body onload="prettyPrint()">
     <header>
-      <h1>Test Page for Missing Language Handlers for Google Code Prettify</h1>
+      <h1>Google Code Prettify Languages Test Page</h1>
     </header>
-
-    <section>
-      <h1>lang-config.js</h1>
-
-      <pre class="prettyprint"><code class="lang-config"># comment
-foo bar
-</code></pre>
-    </section>
 
     <section>
       <h1>lang-nasm.js</h1>
 
-      <pre class="prettyprint"><code class="lang-css">@charset('UTF-8');
+      <pre class="prettyprint"><code class="lang-nasm">@charset('UTF-8');
 
-/** A url that is not quoted. */
-@import(url(/more-styles.css));
 
-HTML { content-before: 'hello\20'; content-after: 'w\6f rld';
-       -moz-spiff: inherit !important }
+; printf1.asm   print an integer from storage and from a register
+; Assemble: nasm -f elf -l printf.lst  printf1.asm
+; Link:   gcc -o printf1  printf1.o
+; Run:    printf1
+; Output: a=5, eax=7
 
-/* Test units on numbers. */
-BODY { margin-bottom: 4px; margin-left: 3in; margin-bottom: 0; margin-top: 5% }
+; Equivalent C code
+; /* printf1.c  print an int and an expression */
+; #include 
+; int main()
+; {
+;   int a=5;
+;   printf("a=%d, eax=%d\n", a, a+2);
+;   return 0;
+; }
 
-/** Test number literals and quoted values. */
-TABLE.foo TR.bar A#visited { color: #001123; font-family: "monospace" }
-/** bolder is not a name, so should be plain.  !IMPORTANT is a keyword
-  * regardless of case.
-  */
-blink { text-decoration: BLINK !IMPORTANT; font-weight: bolder }
+; Declare some external functions
+;
+        extern  printf    ; the C function, to be called
 
-/* Test rgba() and hsla() */
-.rgba {
-  color: rgba(51, 102, 153, 0.4);
-}
+        SECTION .data   ; Data section, initialized variables
 
-.hsla {
-  background-color: hsla(210, 50%, 40%, 0.4);
-}
+  a:  dd  5   ; int a=5;
+fmt:    db "a=%d, eax=%d", 10, 0 ; The printf format, "\n",'0'
 
-/* Test @font-face */
-@font-face {
-  font-family: "Foo Bar";
-  font-style: normal;
-  font-weight: bold;
-  src: url("/font/foo-bar.woff"), local("Foo Bar");
-}
 
-/* Test #rgb compat id*/
-#abcghi {
-  color: #abc;
-}
+        SECTION .text                   ; Code section.
+
+        global main   ; the standard gcc entry point
+main:       ; the program label for the entry point
+        push    ebp   ; set up stack frame
+        mov     ebp,esp
+
+  mov eax, [a]  ; put a from store into register
+  add eax, 2    ; a+2
+  push  eax   ; value of a+2
+        push    dword [a] ; value of variable a
+        push    dword fmt ; address of ctrl string
+        call    printf    ; Call C function
+        add     esp, 12   ; pop stack 3 push times 4 bytes
+
+        mov     esp, ebp  ; takedown stack frame
+        pop     ebp   ; same as "leave" op
+
+  mov eax,0   ;  normal, no error, return value
+  ret     ; return
+  
+
 </code></pre>
     </section>
 
     <section>
-      <h1>lang-gas.js</h1>
-
-      <pre class="prettyprint"><code class="lang-scss">/*!
- * Sassy CSS
- */
-
-// Variable
-$blue: #3bbfce;
-$margin: 16px;
-
-// Mix-in
-@mixin table-base {
-  th {
-    text-align: center;
-    font-weight: bold;
-  }
-  td, th {padding: 2px}
+      <pre class="prettyprint">
+        <code class="lang-nasm">@charset('UTF-8');
+          
+body
+{
+background-color:#d0e4fe;
 }
-
-@mixin left($dist) {
-  float: left;
-  margin-left: $dist;
+h1
+{
+color:orange;
+text-align:center;
 }
-
-#data {
-  @include left(10px);
-  @include table-base;
+p
+{
+font-family:"Times New Roman";
+font-size:20px;
 }
-
-// Extending
-.error {
-  border: 1px #f00;
-  background: #fdd;
-}
-
-.error.intrusion {
-  font-size: 1.3em;
-  font-weight: bold;
-}
-
-.badError {
-  @extend .error;
-  border-width: 3px;
-}
-</code></pre>
-
-      <pre class="prettyprint"><code class="lang-sass">/*!
- * Sass indented syntax
- */
-
-// Variable
-$blue: #3bbfce
-$margin: 16px
-
-// Mix-in
-@mixin table-base
-  th
-    text-align: center
-    font-weight: bold
-  td, th
-    padding: 2px
-
-@mixin left($dist)
-  float: left
-  margin-left: $dist
-
-#data
-  @include left(10px)
-  @include table-base
-
-// Extending
-.error
-  border: 1px #f00
-  background: #fdd
-
-.error.intrusion
-  font-size: 1.3em
-  font-weight: bold
-
-.badError
-  @extend .error
-  border-width: 3px
-</code></pre>
+        </code>
+      </pre>
     </section>
 
-    <section>
-      <h1>lang-vim.js</h1>
-
-      <pre class="prettyprint"><code class="language-vim">&quot; Restore previous session with cofirmation
-function! s:RestoreSessionWithConfirm()
-  let msg = &#39;Do you want to restore previous session?&#39;
-
-  if !argc() &amp;&amp; confirm(msg, &quot;&amp;Yes\n&amp;No&quot;, 1, &#39;Question&#39;) == 1
-    execute &#39;SessionRestore&#39;
-  endif
-endfunction
-</code></pre>
-    </section>
   </body>
 </html>
