@@ -18,7 +18,7 @@
 
 
 
-  <body onload="prettyPrint()">
+  <body onload="prettyPrint()" style="background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSczMDAnIGhlaWdodD0nMzAwJyB2aWV3Qm94PScwIDAgMzAwIDMwMCc+Cgk8ZGVmcz4KCQk8cGF0dGVybiBpZD0nYmx1ZXN0cmlwZScgcGF0dGVyblVuaXRzPSd1c2VyU3BhY2VPblVzZScgeD0nMCcgeT0nMCcgd2lkdGg9JzIwJyBoZWlnaHQ9JzIwJyB2aWV3Qm94PScwIDAgNDAgNDAnID4KCQk8cmVjdCB3aWR0aD0nMTEwJScgaGVpZ2h0PScxMTAlJyBmaWxsPScjZmZmZmZmJy8+CgkJCTxwYXRoIGQ9J00xLDFoNDB2NDBoLTQwdi00MCcgZmlsbC1vcGFjaXR5PScwJyBzdHJva2Utd2lkdGg9JzEnIHN0cm9rZS1kYXNoYXJyYXk9JzAsMSwxJyBzdHJva2U9JyNjY2NjY2MnLz4KCQk8L3BhdHRlcm4+IAoJCTxmaWx0ZXIgaWQ9J2Z1enonIHg9JzAnIHk9JzAnPgoJCQk8ZmVUdXJidWxlbmNlIHR5cGU9J3R1cmJ1bGVuY2UnIHJlc3VsdD0ndCcgYmFzZUZyZXF1ZW5jeT0nLjIgLjMnIG51bU9jdGF2ZXM9JzUnIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz4KCQkJPGZlQ29sb3JNYXRyaXggdHlwZT0nc2F0dXJhdGUnIGluPSd0JyB2YWx1ZXM9JzAnLz4KCQk8L2ZpbHRlcj4KCTwvZGVmcz4KCTxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbGw9J3VybCgjYmx1ZXN0cmlwZSknLz4KPHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI2Z1enopJyBvcGFjaXR5PScwLjEnLz4KPC9zdmc+Cg==');">
     <header>
       <h1>Google Code Prettify Languages Test Page</h1>
     </header>
@@ -27,54 +27,94 @@
       <h1>lang-nasm.js</h1>
 
       <pre class="prettyprint"><code class="lang-nasm">
-; printf1.asm   print an integer from storage and from a register
-; Assemble: nasm -f elf -l printf.lst  printf1.asm
-; Link:   gcc -o printf1  printf1.o
-; Run:    printf1
-; Output: a=5, eax=7
 
-; Equivalent C code
-; /* printf1.c  print an int and an expression */
-; #include 
-; int main()
-; {
-;   int a=5;
-;   printf("a=%d, eax=%d\n", a, a+2);
-;   return 0;
-; }
+  ; printf1.asm   print an integer from storage and from a register
+  ; Assemble: nasm -f elf -l printf.lst  printf1.asm
+  ; Link:   gcc -o printf1  printf1.o
+  ; Run:    printf1
+  ; Output: a=5, eax=7
 
-; Declare some external functions
-;
-        extern  printf    ; the C function, to be called
+  ; Equivalent C code
+  ; /* printf1.c  print an int and an expression */
+  ; #include 
+  ; int main()
+  ; {
+  ;   int a=5;
+  ;   printf("a=%d, eax=%d\n", a, a+2);
+  ;   return 0;
+  ; }
 
-        SECTION .data   ; Data section, initialized variables
+  ; Declare some external functions
+  ;
+          extern  printf    ; the C function, to be called
 
-  a:  dd  5   ; int a=5;
-fmt:    db "a=%d, eax=%d", 10, 0 ; The printf format, "\n",'0'
+          SECTION .data   ; Data section, initialized variables
+
+    a:  dd  5   ; int a=5;
+  fmt:    db "a=%d, eax=%d", 10, 0 ; The printf format, "\n",'0'
 
 
-        SECTION .text                   ; Code section.
+          SECTION .text                   ; Code section.
 
-        global main   ; the standard gcc entry point
-main:       ; the program label for the entry point
-        push    ebp   ; set up stack frame
-        mov     ebp,esp
+          global main   ; the standard gcc entry point
+  main:       ; the program label for the entry point
+          push    ebp   ; set up stack frame
+          mov     ebp,esp
 
-  mov eax, [a]  ; put a from store into register
-  add eax, 2    ; a+2
-  push  eax   ; value of a+2
-        push    dword [a] ; value of variable a
-        push    dword fmt ; address of ctrl string
-        call    printf    ; Call C function
-        add     esp, 12   ; pop stack 3 push times 4 bytes
+    mov eax, [a]  ; put a from store into register
+    add eax, 2    ; a+2
+    push  eax   ; value of a+2
+          push    dword [a] ; value of variable a
+          push    dword fmt ; address of ctrl string
+          call    printf    ; Call C function
+          add     esp, 12   ; pop stack 3 push times 4 bytes
 
-        mov     esp, ebp  ; takedown stack frame
-        pop     ebp   ; same as "leave" op
+          mov     esp, ebp  ; takedown stack frame
+          pop     ebp   ; same as "leave" op
 
-  mov eax,0   ;  normal, no error, return value
-  ret     ; return
+    mov eax,0   ;  normal, no error, return value
+    ret     ; return
+
 </code></pre>
     </section>
+
+<section>
+  <h1>lang-gas.js</h1>
+  <pre class="prettyprint">
+    <code class="lang-gas">
+
+  # ----------------------------------------------------------------------------------------
+  # Writes "Hello, World" to the console using only system calls. Runs on 64-bit Linux only.
+  # To assemble and run:
+  #
+  #     gcc -c hello.s && ld hello.o && ./a.out
+  #
+  # or
+  #
+  #     gcc -nostdlib hello.s && ./a.out
+  # ----------------------------------------------------------------------------------------
+
+          .global _start
+
+          .text
+  _start:
+          # write(1, message, 13)
+          mov     $1, %rax                # system call 1 is write
+          mov     $1, %rdi                # file handle 1 is stdout
+          mov     $message, %rsi          # address of string to output
+          mov     $13, %rdx               # number of bytes
+          syscall                         # invoke operating system to do the write
+
+          # exit(0)
+          mov     $60, %rax               # system call 60 is exit
+          xor     %rdi, %rdi              # we want return code 0
+          syscall                         # invoke operating system to exit
+  message:
+          .ascii  "Hello, world\n"
+    
+    </code>
+  </pre>
+</section>
 
     <section>
     <h1>Test for css highlight</h1>
@@ -86,7 +126,7 @@ main:       ; the program label for the entry point
       font-size: 13px;
       line-height: 18px;
       color: #333333;
-      background-color: #ffffff;
+
     }
      
     a {

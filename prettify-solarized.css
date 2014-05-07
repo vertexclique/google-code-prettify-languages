@@ -8,6 +8,8 @@
  * Reference:
  * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
  */
+
+
 .pln {
   color: #bd3613; }
 
@@ -68,3 +70,12 @@ ol.linenums {
 ol.linenums li {
   line-height: 18px;
   padding-left: 12px; }
+
+pre.prettyprint, code.prettyprint {
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -o-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -khtml-border-radius: 20px;
+  border-radius: 20px;
+}
