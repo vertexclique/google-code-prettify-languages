@@ -5,13 +5,19 @@
 
     <title>Google Code Prettifier Languages</title>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/vertexclique/google-code-prettify-languages/gh-pages/prettify.css">
+    <link rel="stylesheet" href="normalize.css">
+    <!--<link rel="stylesheet" href="prettify.css">-->
+    <link rel="stylesheet" href="prettify-solarized.css">
 
-    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+    <script src="prettify.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="https://raw.githubusercontent.com/vertexclique/google-code-prettify-languages/master/lang-nasm.js"></script>
-    <script src="https://github.com/hail2u/google-code-prettify-language-handlers/blob/gh-pages/lang-css.js"></script>
+    <script src="https://raw.githubusercontent.com/vertexclique/google-code-prettify-languages/master/lang-gas.js"></script>
+    <script src="lang-css.js"></script>
   </head>
+
+
+
   <body onload="prettyPrint()">
     <header>
       <h1>Google Code Prettify Languages Test Page</h1>
@@ -20,9 +26,7 @@
     <section>
       <h1>lang-nasm.js</h1>
 
-      <pre class="prettyprint"><code class="lang-nasm">@charset('UTF-8');
-
-
+      <pre class="prettyprint"><code class="lang-nasm">
 ; printf1.asm   print an integer from storage and from a register
 ; Assemble: nasm -f elf -l printf.lst  printf1.asm
 ; Link:   gcc -o printf1  printf1.o
@@ -69,29 +73,31 @@ main:       ; the program label for the entry point
 
   mov eax,0   ;  normal, no error, return value
   ret     ; return
-  
-
 </code></pre>
     </section>
 
     <section>
+    <h1>Test for css highlight</h1>
       <pre class="prettyprint">
-        <code class="lang-nasm">@charset('UTF-8');
-          
-body
-{
-background-color:#d0e4fe;
-}
-h1
-{
-color:orange;
-text-align:center;
-}
-p
-{
-font-family:"Times New Roman";
-font-size:20px;
-}
+        <code class="lang-css">
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 13px;
+      line-height: 18px;
+      color: #333333;
+      background-color: #ffffff;
+    }
+     
+    a {
+      color: #0088cc;
+      text-decoration: none;
+    }
+     
+    a:hover {
+      color: #005580;
+      text-decoration: underline;
+    }
         </code>
       </pre>
     </section>
