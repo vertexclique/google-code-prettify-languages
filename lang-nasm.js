@@ -40,7 +40,7 @@ PR['registerLangHandler'](
          // A double quoted, possibly multi-line, string.
          [PR['PR_STRING'],      /^!?\"(?:[^\"\\]|\\[\s\S])*(?:\"|$)/, null, '"'],
 
-         [PR['PR_COMMENT'],     /^;[^\r\n]*/, null, ';']
+         [PR['PR_COMMENT'],     /;[^\r\n]*/, null, ';']
         ],
         [
 
