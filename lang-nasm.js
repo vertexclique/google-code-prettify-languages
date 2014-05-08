@@ -36,6 +36,8 @@ PR['registerLangHandler'](
     PR['createSimpleLexer'](
         [
          // Whitespace
+         [PR['PR_KEYWORD'],     /^(?:aaa|aad|aam|aas|adc|add|and|call|cbw|clc|cld|cli|cmc|cmp|cmpsb|cmpsw|cwd|daa|das|dec|div|esc|hlt|idiv|imul|in|inc|int|into|iret|ja|jae|jb|jbe|jc|jcxz|je|jg|jge|jl|jle|jna|jnae|jnb|jnbe|jnc|jne|jng|jnge|jnl|jnle|jno|jnp|jns|jnz|jo|jp|jpe|jpo|js|jz|jmp|lahf|lar|lds|lea|les|lock|lodsb|lodsw|loop|loope|loopz|loopnz|loopne|mov|movs|movsb|movsw|mul|neg|nop|not|or|out|pop|popf|push|pushf|rcl|rcr|rep|repe|repne|repnz|repz|ret|retn|retf|rol|ror|sahf|sal|sar|sbb|scasb|scasw|shl|shr|stc|std|sti|stosb|stosw|sub|test|wait|xchg|xlat|xor|bits 16|bits 32|bits 64|use16|use32|use64|\[bits 16\]|\[bits 32\]|\[bits 64\]|default|section|segment|absolute|extern|global|common|cpu)\b/i, null],
+         
          [PR['PR_PLAIN'],       /^[\t\n\r \xA0]+/, null, '\t\n\r \xA0'],
          // A double quoted, possibly multi-line, string.
          [PR['PR_STRING'],      /^!?\"(?:[^\"\\]|\\[\s\S])*(?:\"|$)/, null, '"'],
@@ -47,7 +49,6 @@ PR['registerLangHandler'](
 
          [PR['PR_DECLARATION'], /^(?:db|dw|dd|dq|dt|do|resb|resw|resd|resq|rest|reso|incbin|equ|times|byte|word|dword|qword|tbyte|nosplit|near|far|org|label|struc|endstruc|istruc|iend|at|align|alignb|ends|offset|short|length|size|public|goto|seg|repeat|until)\b/i],
 
-         [PR['PR_KEYWORD'],     /^(?:aaa|aad|aam|aas|adc|add|and|call|cbw|clc|cld|cli|cmc|cmp|cmpsb|cmpsw|cwd|daa|das|dec|div|esc|hlt|idiv|imul|in|inc|int|into|iret|ja|jae|jb|jbe|jc|jcxz|je|jg|jge|jl|jle|jna|jnae|jnb|jnbe|jnc|jne|jng|jnge|jnl|jnle|jno|jnp|jns|jnz|jo|jp|jpe|jpo|js|jz|jmp|lahf|lar|lds|lea|les|lock|lodsb|lodsw|loop|loope|loopz|loopnz|loopne|mov|movs|movsb|movsw|mul|neg|nop|not|or|out|pop|popf|push|pushf|rcl|rcr|rep|repe|repne|repnz|repz|ret|retn|retf|rol|ror|sahf|sal|sar|sbb|scasb|scasw|shl|shr|stc|std|sti|stosb|stosw|sub|test|wait|xchg|xlat|xor|bits 16|bits 32|bits 64|use16|use32|use64|\[bits 16\]|\[bits 32\]|\[bits 64\]|default|section|segment|absolute|extern|global|common|cpu)\b/i, null],
          
          [PR['PR_PLAIN'],       /^[%@!](?:[-a-zA-Z$._][-a-zA-Z$._0-9]*|\d+)/],
          
