@@ -56,9 +56,9 @@ PR['registerLangHandler'](
          
          [PR['PR_LITERAL'],     /^(?:\d+|0[xX][a-fA-F0-9]+)/],
 
-         [PR['PR_TYPE'],        /^[$_]*[A-Z][_$A-Z0-9]*[a-z][\w$]*/],
+         [PR['PR_TYPE'],        /^(?:main|aesenc|aesenclast|aesdec|aesdeclast|aeskeygenassist|aesimc|vfmaddpd|vfmaddps|vfmaddsd|vfmaddss|vfmaddsubpd|vfmaddsubps|vfmsubaddpd|vfmsubaddps|vfmsubpd|vfmsubps|vfmsubsd|vfmsubss|vfnmaddpd|vfnmaddps|vfnmaddsd|vfnmaddss|vfnmsubpd|vfnmsubps|vfnmsubsd|vfnmsubss)\b/i],
 
          // punctuation
-         [PR['PR_PUNCTUATION'], /^(?:main|aesenc|aesenclast|aesdec|aesdeclast|aeskeygenassist|aesimc|vfmaddpd|vfmaddps|vfmaddsd|vfmaddss|vfmaddsubpd|vfmaddsubps|vfmsubaddpd|vfmsubaddps|vfmsubpd|vfmsubps|vfmsubsd|vfmsubss|vfnmaddpd|vfnmaddps|vfnmaddsd|vfnmaddss|vfnmsubpd|vfnmsubps|vfnmsubsd|vfnmsubss)\b/]
+         [PR['PR_PUNCTUATION'], /^[()\[\]{},=*<>:]|\.\.\.$/]
         ]),
     ['nasm', 'asm']);
