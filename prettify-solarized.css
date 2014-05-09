@@ -9,6 +9,15 @@
  * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
  */
 
+h1 {
+  font-family: "Righteous", sans-serif;
+  font-size:300%;
+}
+
+h2 {
+  font-family: "Arvo", sans-serif;
+  font-size:250%;
+}
 
 .pln {
   color: #bd3613; }
